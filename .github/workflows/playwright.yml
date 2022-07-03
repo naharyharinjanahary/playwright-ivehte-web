@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ main, master, cicdivehteweb ]
 jobs:
-  test:
+  ci-cd-ivehte-web:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
