@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
-  [push, fork]:
-    branches: [ main, master, dev ]
+  push:
+    branches: [ main, master, cicdivehteweb ]
   pull_request:
-    branches: [ main, master, dev ]
+    branches: [ main, master, cicdivehteweb ]
 jobs:
   test:
     timeout-minutes: 60
