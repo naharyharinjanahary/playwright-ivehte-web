@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Ivehte web', () => {
+test.describe.only('Ivehte web', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('https://staging-ivehte-dev.madait-lab.com/login');
     /****** Début Autentification ******/
@@ -18,7 +18,7 @@ test.describe('Ivehte web', () => {
     /****** Fin Autentification ******/ //*[@id="search-user"]
   })
 
-  test.only('Filtrage agenda par date, spécialité et type affichage', async({ page }) => {
+  test('Filtrage agenda par date, spécialité et type affichage', async({ page }) => {
     const ongletAgenda = page.locator('text=Mon agenda').first();
     await ongletAgenda.click();
     await page.locator(`text=July 2022`).click();
