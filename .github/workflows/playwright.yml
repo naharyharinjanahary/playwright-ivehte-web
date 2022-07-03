@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master, cicdivehteweb ]
+    branches: [ main, cicdivehteweb, stagingweb ]
   pull_request:
-    branches: [ main, master, cicdivehteweb ]
+    branches: [ main, cicdivehteweb, stagingweb ]
 jobs:
   ci-cd-ivehte-web:
     timeout-minutes: 60
