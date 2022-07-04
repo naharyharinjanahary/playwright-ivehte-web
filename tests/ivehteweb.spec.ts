@@ -65,20 +65,20 @@ test.describe.only('Ivehte web', () => {
     await page.locator(`text=Morel Christiane`).click();
     await page.locator(`text=Lefort Jean`).click();
     await page.locator(`text=Ferrand Étienne`).click();
-    await page.pause();
+    // await page.pause();
     await page.locator('#mui-14').click();
     await page.keyboard.press('Escape');
     await page.locator('text=Type de consulation : Sélectionnez le type voulu >> [data-testid="KeyboardArrowDownIcon"]').click();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.locator('text=Salle :Sélectionnez une salle >> [data-testid="KeyboardArrowDownIcon"]').click();
-    await page.pause();
+    // await page.pause();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.locator('[placeholder="Tapez votre texte"]').click();
     await page.keyboard.type('Test Auto');
     await page.locator('button:has-text("Valider")').click();
-    await page.pause();
+    // await page.pause();
     /****** Fin Test Mon agenda ******/
   });
 })
