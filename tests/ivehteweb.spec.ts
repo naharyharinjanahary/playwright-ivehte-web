@@ -24,7 +24,6 @@ test.describe.only('Ivehte web', () => {
     await page.locator(`text=July 2022`).click();
     await page.locator('text=June').click();
     await page.locator('button:has-text("29")').click();
-    // expect(page.locator(`text=Voir l'agenda de`).first()).toBeVisible();
     // await page.pause();
     await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
     await page.keyboard.press('ArrowDown');
@@ -36,12 +35,10 @@ test.describe.only('Ivehte web', () => {
     // await page.pause();
   });
 
-
   test('Créer un événement', async ({ page }) => {
     /****** Début Test Mon agenda ******/
     const ongletAgenda = page.locator('text=Mon agenda').first();
     const addEven = page.locator('text=Créer un événement').first();
-
     // Cliquer sur Mon agenda
     await Promise.all([
      // page.waitForNavigation(/*{ url: 'https://staging-ivehte-dev.madait-lab.com/dashboard' }*/),
@@ -50,7 +47,6 @@ test.describe.only('Ivehte web', () => {
       addEven.click(),
       expect(page.locator('text=Sélectionnez un type').first()).toBeVisible(),
     ]);
-
     await page.locator('text=Type de l\' événement : Sélectionnez un type >> [data-testid="KeyboardArrowDownIcon"]').click();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
@@ -65,19 +61,25 @@ test.describe.only('Ivehte web', () => {
     await page.locator('text=Sélectionnez un ou plusieurs intervenant(s)').click();
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.locator(`text=Morel Christiane`).click();
+    await page.locator(`text=Lefort Jean`).click();
+    await page.locator(`text=Ferrand Étienne`).click();
+    await page.pause();
+    await page.locator('#mui-14').click();
     await page.keyboard.press('Escape');
     await page.locator('text=Type de consulation : Sélectionnez le type voulu >> [data-testid="KeyboardArrowDownIcon"]').click();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.locator('text=Salle :Sélectionnez une salle >> [data-testid="KeyboardArrowDownIcon"]').click();
+    await page.pause();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.locator('[placeholder="Tapez votre texte"]').click();
     await page.keyboard.type('Test Auto');
+    await page.locator('button:has-text("Valider")').click();
     await page.pause();
-  
     /****** Fin Test Mon agenda ******/
-  
   });
 })
 
