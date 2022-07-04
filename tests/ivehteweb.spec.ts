@@ -94,5 +94,64 @@ test.describe.only('Ivehte web', () => {
     // await page.pause();
     /****** Fin Test Mon agenda ******/
   });
+
+  test('Chercher et contacter un patient', async ({ page }) => {
+    await page.locator('#root li[role="menuitem"]:has-text("Patients")').click();
+    await page.locator('[placeholder="Rechercher"]').click();
+    await page.locator('[placeholder="Rechercher"]').fill('Honoré Schneider');
+    await page.locator('text=Contacter').first().click();
+    await page.locator('[placeholder="Objet de l\\\'email"]').click();
+    await page.keyboard.type('CICD AUTO TEST');
+    await page.locator('div:nth-child(3) > div:nth-child(2) > div > div > .MuiFormControl-root > .MuiOutlinedInput-root').click();
+    await page.keyboard.type('CICD AUTO TEST IVEHTE');
+    await page.locator('button:has-text("Envoyer message")').click();
+  });
+
+  test('Ajout patient', async ({ page }) => {
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/patients/add');
+    await page.locator('input[type="radio"]').first().check();
+    await page.locator('input[type="radio"]').nth(1).check();
+    await page.locator('[placeholder="Tapez le nom de naissance"]').click();
+    await page.keyboard.type('TEST CI 2');
+    await page.locator('[placeholder="Tapez le ou les prénoms"]').click();
+    await page.keyboard.type('CD TEST 2');
+    await page.locator('[placeholder="Toulouse"]').click();
+    await page.keyboard.type('TEST 2');
+    await page.locator('input[type="radio"]').nth(2).check();
+    await page.locator('input[type="radio"]').nth(3).check();
+    await page.locator('[placeholder="Tapez le nom de la profession"]').click();
+    await page.keyboard.type('TEST 2');
+    await page.locator('[placeholder="Tapez l\\\'adresse complète"]').click();
+    await page.keyboard.type('TEST 2');
+    await page.locator('[placeholder="Entrez le numéro téléphone"]').click();
+    await page.keyboard.type('0330223663');
+    await page.locator('[placeholder="Entrez l\\\'adresse mail"]').click();
+    await page.keyboard.type('test2@gmail.com');
+    await page.locator('button:has-text("Valider l\'inscription")').click();
+  });
+
+  test('Vérification doublon patient', async ({ page }) => {
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/patients/add');
+    await page.locator('input[type="radio"]').first().check();
+    await page.locator('input[type="radio"]').nth(1).check();
+    await page.locator('[placeholder="Tapez le nom de naissance"]').click();
+    await page.keyboard.type('TEST CI');
+    await page.locator('[placeholder="Tapez le ou les prénoms"]').click();
+    await page.keyboard.type('CD TEST');
+    await page.locator('[placeholder="Toulouse"]').click();
+    await page.keyboard.type('TEST');
+    await page.locator('input[type="radio"]').nth(2).check();
+    await page.locator('input[type="radio"]').nth(3).check();
+    await page.locator('[placeholder="Tapez le nom de la profession"]').click();
+    await page.keyboard.type('TEST');
+    await page.locator('[placeholder="Tapez l\\\'adresse complète"]').click();
+    await page.keyboard.type('TEST');
+    await page.locator('[placeholder="Entrez le numéro téléphone"]').click();
+    await page.keyboard.type('0330223665');
+    await page.locator('[placeholder="Entrez l\\\'adresse mail"]').click();
+    await page.keyboard.type('test@gmail.com');
+    await page.locator('button:has-text("Valider l\'inscription")').click();
+    await page.locator('text=ok').click();
+  });
 })
 
