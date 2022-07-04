@@ -21,10 +21,22 @@ test.describe.only('Ivehte web', () => {
   test('Filtrage agenda par date, spécialité et type affichage', async({ page }) => {
     const ongletAgenda = page.locator('text=Mon agenda').first();
     await ongletAgenda.click();
+    /** Début Agenda par date */
     await page.locator(`text=July 2022`).click();
     await page.locator('text=June').click();
     await page.locator('button:has-text("29")').click();
     // await page.pause();
+    /** Fin Agenda par date */
+
+    /** Début Agenda par personnel */
+    await page.locator('text=Voir l\'agenda de').click();
+    await page.locator('#Charles_Pinto_').check();
+    await page.locator('#Christiane_Morel_').check();
+    await page.locator('button:has-text("Valider")').click();
+    // await page.pause();
+    /** Fin Agenda par personnel */
+
+    /** Début Agenda par spécialité et type affichage */
     await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
@@ -33,6 +45,7 @@ test.describe.only('Ivehte web', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     // await page.pause();
+    /** Fin Agenda par spécialité et type affichage */
   });
 
   test('Créer un événement', async ({ page }) => {
