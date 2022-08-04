@@ -5,7 +5,7 @@ test.describe("Ivehte web", () => {
    * Authentification
    */
   test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:3000/login");
+    await page.goto("https://staging-ivehte-dev.madait-lab.com/login");
     /****** Début Autentification ******/
     await page
       .locator('[placeholder="Entrez votre nom d\\\'utilisateur"]')
@@ -127,7 +127,7 @@ test.describe("Ivehte web", () => {
 
   test.only("Add patient", async ({ page }) => {
     /** Début ajout patient */
-    await page.goto('http://localhost:3000/patients/add');
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/patients/add');
     await page.locator('input[type="radio"]').first().check();
     await page.locator('input[type="radio"]').nth(1).check();
     await page.locator('[placeholder="Tapez le nom de naissance"]').click();
@@ -159,7 +159,7 @@ test.describe("Ivehte web", () => {
 
   test.only("Contacter et modifier un patient", async ({ page }) => {
     /** Début contacter patient */
-    await page.goto('http://localhost:3000/dashboard');
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
     await page.locator('#root ul[role="menu"] >> text=Patients').click();
     await page.locator('[placeholder="Rechercher"]').click();
     await page.keyboard.type("TEST CI 2 CD TEST 2");
@@ -172,7 +172,7 @@ test.describe("Ivehte web", () => {
     /** Fin contacter patient */
 
     /** Debut modifier patient */
-    await page.goto('http://localhost:3000/dashboard');
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
     await page.locator('#root ul[role="menu"] >> text=Patients').click();
     await page.locator('[placeholder="Rechercher"]').click();
     await page.keyboard.type("TEST CI 2 CD TEST 2");
