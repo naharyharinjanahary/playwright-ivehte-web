@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Ivehte web", () => {
+test.describe.only("Test Ivehte Web", () => {
   /**
    * Authentification
    */
@@ -26,7 +26,7 @@ test.describe("Ivehte web", () => {
   /**
    * Filtrage agenda par date, spécialité et type d'affichage
    */
-  test.only("Agenda", async ({ page }) => {
+  test("Agenda", async ({ page }) => {
     const ongletAgenda = page.locator("text=Mon agenda").first();
     await ongletAgenda.click();
 
@@ -125,7 +125,7 @@ test.describe("Ivehte web", () => {
     /****** Fin Test Créer événement ******/
   });
 
-  test.only("Add patient", async ({ page }) => {
+  test("Add patient", async ({ page }) => {
     /** Début ajout patient */
     await page.goto('https://staging-ivehte-dev.madait-lab.com/patients/add');
     await page.locator('input[type="radio"]').first().check();
@@ -157,7 +157,41 @@ test.describe("Ivehte web", () => {
     /** Fin ajout patient */
   })
 
-  test.only("Contacter et modifier un patient", async ({ page }) => {
+  /**
+   * Vérification doublon patient
+   */
+  test("Vérification doublon patient", async ({ page }) => {
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/patients/add');
+    await page.locator('input[type="radio"]').first().check();
+    await page.locator('input[type="radio"]').nth(1).check();
+    await page.locator('[placeholder="Tapez le nom de naissance"]').click();
+    await page.keyboard.type("TEST CI 2");
+    await page.locator('[placeholder="Tapez le ou les prénoms"]').click();
+    await page.keyboard.type("CD TEST 2");
+    await page.locator('[placeholder="dd\\/mm\\/yyyy"]').click();
+    await page.locator('[placeholder="dd\\/mm\\/yyyy"]').press('Control+a');
+    await page.locator('[placeholder="dd\\/mm\\/yyyy"]').fill('01');
+    await page.locator('[placeholder="dd\\/mm\\/yyyy"]').press('ArrowRight');
+    await page.locator('[placeholder="dd\\/mm\\/yyyy"]').fill('01/04');
+    await page.locator('[placeholder="dd\\/mm\\/yyyy"]').press('ArrowRight');
+    await page.locator('[placeholder="dd\\/mm\\/yyyy"]').fill('01/04/1993');
+    await page.locator('[placeholder="Toulouse"]').click();
+    await page.keyboard.type("TEST 2");
+    await page.locator('input[type="radio"]').nth(2).check();
+    await page.locator('input[type="radio"]').nth(3).check();
+    await page.locator('[placeholder="Tapez le nom de la profession"]').click();
+    await page.keyboard.type("TEST 2");
+    await page.locator('[placeholder="Tapez l\\\'adresse complète"]').click();
+    await page.keyboard.type("TEST 2");
+    await page.locator('[placeholder="Entrez le numéro téléphone"]').click();
+    await page.keyboard.type("0330223663");
+    await page.locator('[placeholder="Entrez l\\\'adresse mail"]').click();
+    await page.keyboard.type("test2@gmail.com");
+    await page.locator('button:has-text("Valider l\'inscription")').click();
+    await page.locator("text=ok").click();
+  });
+
+  test("Contacter et modifier un patient", async ({ page }) => {
     /** Début contacter patient */
     await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
     await page.locator('#root ul[role="menu"] >> text=Patients').click();
@@ -184,200 +218,4 @@ test.describe("Ivehte web", () => {
     await page.locator('text=ok').click();
     /** Fin modifier patient */
   })
-
-  /**
-   * Créer un événement
-   */
-  // test("Créer un événement", async ({ page }) => {
-  //   /****** Début Test Mon agenda ******/
-  //   const ongletAgenda = page.locator("text=Mon agenda").first();
-  //   const addEven = page.locator("text=Créer un événement").first();
-  //   // Cliquer sur Mon agenda
-  //   await Promise.all([
-  //     // page.waitForNavigation(/*{ url: 'https://staging-ivehte-dev.madait-lab.com/dashboard' }*/),
-  //     ongletAgenda.click(),
-  //     expect(page.locator(`text=Planning`).first()).toBeVisible(),
-  //     addEven.click(),
-  //     expect(page.locator("text=Sélectionnez un type").first()).toBeVisible(),
-  //   ]);
-  //   await page
-  //     .locator(
-  //       'text=Type de l\' événement : Sélectionnez un type >> [data-testid="KeyboardArrowDownIcon"]'
-  //     )
-  //     .click();
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("Enter");
-  //   await page
-  //     .locator('[placeholder="Renseigner le nom de votre patient\\.\\.\\."]')
-  //     .click();
-  //   await page.keyboard.type("Alexandre Nguyen");
-  //   await page.keyboard.press("ArrowUp");
-  //   await page.keyboard.press("Enter");
-  //   await page
-  //     .locator(
-  //       'text=Spécialité de l’intervenant :Sélectionner une spécialité >> [data-testid="KeyboardArrowDownIcon"]'
-  //     )
-  //     .click();
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("Enter");
-  //   await page
-  //     .locator("text=Sélectionnez un ou plusieurs intervenant(s)")
-  //     .click();
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("Tab");
-  //   await page.keyboard.press("Tab");
-  //   await page.locator("#Morel_Christiane").check();
-  //   await page.locator("#Lefort_Jean").check();
-  //   await page.locator("#Ferrand__tienne").check();
-  //   // await page.pause();
-  //   await page.locator("#mui-14").click();
-  //   //await page.keyboard.press('Escape');
-  //   await page
-  //     .locator(
-  //       'text=Type de consulation : Sélectionnez le type voulu >> [data-testid="KeyboardArrowDownIcon"]'
-  //     )
-  //     .click();
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("Enter");
-  //   await page
-  //     .locator(
-  //       'text=Salle :Sélectionnez une salle >> [data-testid="KeyboardArrowDownIcon"]'
-  //     )
-  //     .click();
-  //   // await page.pause();
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("Enter");
-  //   await page.locator('[placeholder="Tapez votre texte"]').click();
-  //   await page.keyboard.type("Test Auto");
-  //   await page.locator('button:has-text("Valider")').click();
-  //   // await page.pause();
-  //   /****** Fin Test Mon agenda ******/
-  // });
-
-  /**
-   * Rechercher un patient pour l'envoyer un message via email
-   */
-  // test("Contacter un patient", async ({ page }) => {
-  //   await page
-  //     .locator('#root li[role="menuitem"]:has-text("Patients")')
-  //     .click();
-  //   await page.locator('[placeholder="Rechercher"]').click();
-  //   await page.locator('[placeholder="Rechercher"]').fill("Honoré Schneider");
-  //   await page.locator("text=Contacter").first().click();
-  //   await page.locator('[placeholder="Objet de l\\\'email"]').click();
-  //   await page.keyboard.type("CICD AUTO TEST");
-  //   await page
-  //     .locator(
-  //       "div:nth-child(3) > div:nth-child(2) > div > div > .MuiFormControl-root > .MuiOutlinedInput-root"
-  //     )
-  //     .click();
-  //   await page.keyboard.type("CICD AUTO TEST IVEHTE");
-  //   await page.locator('button:has-text("Envoyer message")').click();
-  // });
-
-  /**
-   * Ajouter un nouveau patient en saisisant les données
-   */
-  // test("Ajout patient", async ({ page }) => {
-  //   await page.goto("https://staging-ivehte-dev.madait-lab.com/patients/add");
-  //   await page.locator('input[type="radio"]').first().check();
-  //   await page.locator('input[type="radio"]').nth(1).check();
-  //   await page.locator('[placeholder="Tapez le nom de naissance"]').click();
-  //   await page.keyboard.type("TEST CI 2");
-  //   await page.locator('[placeholder="Tapez le ou les prénoms"]').click();
-  //   await page.keyboard.type("CD TEST 2");
-  //   await page.locator('[placeholder="Toulouse"]').click();
-  //   await page.keyboard.type("TEST 2");
-  //   await page.locator('input[type="radio"]').nth(2).check();
-  //   await page.locator('input[type="radio"]').nth(3).check();
-  //   await page.locator('[placeholder="Tapez le nom de la profession"]').click();
-  //   await page.keyboard.type("TEST 2");
-  //   await page.locator('[placeholder="Tapez l\\\'adresse complète"]').click();
-  //   await page.keyboard.type("TEST 2");
-  //   await page.locator('[placeholder="Entrez le numéro téléphone"]').click();
-  //   await page.keyboard.type("0330223663");
-  //   await page.locator('[placeholder="Entrez l\\\'adresse mail"]').click();
-  //   await page.keyboard.type("test2@gmail.com");
-  //   await page.locator('button:has-text("Valider l\'inscription")').click();
-  // });
-
-  /**
-   * Vérification doublon patient
-   */
-  // test("Vérification doublon patient", async ({ page }) => {
-  //   await page.goto("https://staging-ivehte-dev.madait-lab.com/patients/add");
-  //   await page.locator('input[type="radio"]').first().check();
-  //   await page.locator('input[type="radio"]').nth(1).check();
-  //   await page.locator('[placeholder="Tapez le nom de naissance"]').click();
-  //   await page.keyboard.type("TEST CI");
-  //   await page.locator('[placeholder="Tapez le ou les prénoms"]').click();
-  //   await page.keyboard.type("CD TEST");
-  //   await page.locator('[placeholder="Toulouse"]').click();
-  //   await page.keyboard.type("TEST");
-  //   await page.locator('input[type="radio"]').nth(2).check();
-  //   await page.locator('input[type="radio"]').nth(3).check();
-  //   await page.locator('[placeholder="Tapez le nom de la profession"]').click();
-  //   await page.keyboard.type("TEST");
-  //   await page.locator('[placeholder="Tapez l\\\'adresse complète"]').click();
-  //   await page.keyboard.type("TEST");
-  //   await page.locator('[placeholder="Entrez le numéro téléphone"]').click();
-  //   await page.keyboard.type("0330223665");
-  //   await page.locator('[placeholder="Entrez l\\\'adresse mail"]').click();
-  //   await page.keyboard.type("test@gmail.com");
-  //   await page.locator('button:has-text("Valider l\'inscription")').click();
-  //   await page.locator("text=ok").click();
-  // });
-
-  /**
-   * Notification
-   */
-  test("Notification", async ({ page }) => {
-    /** Début cliquer sur icon notification */
-    await page.locator("text=RFabre Élise SAA >> button").first().click();
-    await page
-      .locator('div[role="button"]:has-text("Sélectionner les types")')
-      .click();
-    await page.locator('ul[role="listbox"] >> text=Nouvel événement').click();
-    // await page.pause();
-    /** Fin cliquer sur icon notification */
-
-    /** Début Annulation */
-    await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
-    await page.locator("text=Annulation").click();
-    // await page.pause();
-    /** Fin Annulation */
-
-    /** Début Inscription */
-    await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
-    await page.locator("text=Inscription").click();
-    // await page.pause();
-    /** Fin Inscription */
-
-    /** Début Rendez-vous */
-    await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
-    await page.locator("text=Rendez-vous").first().click();
-    // await page.pause();
-    /** Fin Rendez-vous */
-
-    /** Début Atelier */
-    await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
-    await page.locator("text=Atelier").click();
-    // await page.pause();
-    /** Fin Atelier */
-
-    /** Début Suppression événement */
-    await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
-    await page
-      .locator('li[role="option"]:has-text("Suppression événement")')
-      .click();
-    // await page.pause();
-    /** Fin Suppression événement */
-
-    /** Début Changement rendez-vous */
-    await page.locator('[data-testid="KeyboardArrowDownIcon"]').first().click();
-    await page.locator("text=Changement rendez-vous").click();
-    // await page.pause();
-    /** Fin Changement rendez-vous */
-  });
 });
