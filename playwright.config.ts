@@ -27,7 +27,7 @@ const config: PlaywrightTestConfig = {
   //forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   // retries: process.env.CI ? 2 : 0,
-  retries: 0,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
   //workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -41,6 +41,10 @@ const config: PlaywrightTestConfig = {
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    // baseURL: 'http://localhost:8000/',
+    // extraHTTPHeaders: {
+    //   "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NjAxMjY0NzEsImV4cCI6MTY2MDIxMjg3MSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQHlvcG1haWwuY29tIn0.nudzauPcm6CtHdo37DlCtPcyqL2hZvclKunuiAxEBvUKjBLJcK4SDz5VHBc7jl_ApW-82Tecp6bplqKHgoehpYXcUBe2aV-Bu7zXw8JDABXGCVsAqoh8yS4_3BLEP1HOu-R0jvJJgk9XSD2JfOuMjUxsiT1QWH_2-OzkNpn9E7U20B4lgXlPIgULDNAGDXdq3k6pk-YOw8Ikz8J3n3v7vqSqDdXKVs0gDOUVeBhKq-uO4jLfTJy8wnWPFLBw07_JkQIBXcZYgIgK_LB4VadBMpOMgkfIlwPJ2cxRDeihtUdErMcVoFbXbY_5OvjXsylVO5AccxY5Kw5LNgmfKc_t2Q"
+    // }
   },
   // webServer: {
   //   command: 'npx http-server -p 5000 ./',
