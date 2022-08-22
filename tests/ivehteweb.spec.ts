@@ -31,11 +31,11 @@ test.describe.only("Test Ivehte Web", () => {
     await ongletAgenda.click();
 
     /** Début Agenda par personnel */
-    // await page.locator("text=Voir l'agenda de").click();
-    // await page.locator("text=Capucine Moulin").click();
-    // //await page.locator("#Christiane_Morel_").check();
-    // await page.locator('button:has-text("Valider")').click();
-    // await page.pause();
+    await page.locator("text=Voir l'agenda de").click();
+    await page.locator("text=Eugène Barthelemy").click();
+    //await page.locator("#Christiane_Morel_").check();
+    await page.locator('button:has-text("Valider")').click();
+    await page.pause();
     /** Fin Agenda par personnel */
 
     /** Début Agenda par date */
@@ -216,17 +216,17 @@ test.describe.only("Test Ivehte Web", () => {
     /** Fin modifier patient */
   })
 
-  // test("Modifier observation", async( {page} ) => {
-  //   await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
-  //   await page.locator('#root ul[role="menu"] >> text=Patients').click();
-  //   await page.locator('li[role="menuitem"]:has-text("OBSERVATIONS")').click();
-  //   await page.locator('text=Non in omnis ad et ipsa.Psychologique').click();
-  //   await page.locator('#MODIFIER').click();
-  //   await page.locator('[placeholder="Renseigner le nom de l\\\'intervenant"]').click();
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("Enter");
-  //   await page.locator('button:has-text("VALIDER L\\\'OBSERVATION")').click();
-  // })
+  test.skip("Modifier observation", async( {page} ) => {
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+    await page.locator('#root ul[role="menu"] >> text=Patients').click();
+    await page.locator('li[role="menuitem"]:has-text("OBSERVATIONS")').click();
+    await page.locator('text=Non in omnis ad et ipsa.Psychologique').click();
+    await page.locator('#MODIFIER').click();
+    await page.locator('[placeholder="Renseigner le nom de l\\\'intervenant"]').click();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Enter");
+    await page.locator('button:has-text("VALIDER L\\\'OBSERVATION")').click();
+  })
 
   test("Ajout HDJ", async( {page} ) => {
     await page.goto('https://staging-ivehte-dev.madait-lab.com/hdj/new');
@@ -260,44 +260,48 @@ test.describe.only("Test Ivehte Web", () => {
     await page.locator('button:has-text("Enregistrer l\'HDJ")').click();
   })
 
-  // test("Créer un programme", async( {page} ) => {
-  //   await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
-  //   await page.locator('#root >> text=Programmes').click();
-  //   await page.locator('button:has-text("créer un nouveau programme")').click();
-  //   await page.locator('text=Cliquer pour modifier l\'icône.Sélectionnez un niveau >> [data-testid="KeyboardArrowDownIcon"]').click();
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("Enter");
-  //   await page.locator('[placeholder="Tapez le nom du programme"]').click();
-  //   await page.keyboard.type("TEST CICD");
-  //   await page.locator('text=Pathologie :Sélectionnez une pathologie >> [data-testid="KeyboardArrowDownIcon"]').click();
-  //   await page.keyboard.press("ArrowDown");
-  //   await page.keyboard.press("Enter");
-  //   await page.locator('text=Date de début :​ >> [placeholder="dd\\/mm\\/yyyy"]').click();
-  //   await page.keyboard.press('Control+a');
-  //   await page.keyboard.type('01/09/2022');
-  //   await page.locator('text=Date Fin :​ >> [placeholder="dd\\/mm\\/yyyy"]').click();
-  //   await page.keyboard.press('Control+a');
-  //   await page.keyboard.type('03/09/2022');
-  //   await page.locator('#Atelier_7__Et_ex__').check();
-  //   await page.locator('text=Roger Gérard').click()
-  //   await page.locator('button:has-text("Valider le programme")').click();
-  // })
+  test.skip("Créer un programme", async( {page} ) => {
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+    await page.locator('#root >> text=Programmes').click();
+    await page.locator('button:has-text("créer un nouveau programme")').click();
+    await page.locator('text=Cliquer pour modifier l\'icône.Sélectionnez un niveau >> [data-testid="KeyboardArrowDownIcon"]').click();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Enter");
+    await page.locator('[placeholder="Tapez le nom du programme"]').click();
+    await page.keyboard.type("TEST CICD");
+    await page.locator('text=Pathologie :Sélectionnez une pathologie >> [data-testid="KeyboardArrowDownIcon"]').click();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Enter");
+    await page.locator('text=Date de début :​ >> [placeholder="dd\\/mm\\/yyyy"]').click();
+    await page.keyboard.press('Control+a');
+    await page.keyboard.type('01/09/2022');
+    await page.locator('text=Date Fin :​ >> [placeholder="dd\\/mm\\/yyyy"]').click();
+    await page.keyboard.press('Control+a');
+    await page.keyboard.type('03/09/2022');
+    await page.locator('#Atelier_7__Et_ex__').check();
+    await page.locator('text=Roger Gérard').click()
+    await page.locator('button:has-text("Valider le programme")').click();
+  })
 
-  // test("Modifier un programme", async( { page } ) => {
-  //   await page.goto('https://staging-ivehte-dev.madait-lab.com/programmes');
-  //   await page.locator('text=GESTION DU PROGRAMME').first().click();
-  //   await page.locator('button:has-text("Modifier le programme")').click();
-  //   await page.locator('[placeholder="Tapez le nom du programme"]').click();
-  //   await page.keyboard.press('Control+a');
-  //   await page.keyboard.type('TEST CICD IVEHTE');
-  //   await page.locator('button:has-text("Enregistrer les modifications")').click();
-  // })
+  test.skip("Modifier un programme", async( { page } ) => {
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/programmes');
+    await page.locator('text=GESTION DU PROGRAMME').first().click();
+    await page.locator('button:has-text("Modifier le programme")').click();
+    await page.locator('[placeholder="Tapez le nom du programme"]').click();
+    await page.keyboard.press('Control+a');
+    await page.keyboard.type('TEST CICD IVEHTE');
+    await page.locator('button:has-text("Enregistrer les modifications")').click();
+  })
 
   test("Filtrage programme", async ({ page }) => {
     await page.goto('https://staging-ivehte-dev.madait-lab.com/programmes');
-    await page.locator('#Diab_te').check();
-    await page.locator('#Diab_te').uncheck();
-    await page.locator('#Initial').check();
-    await page.locator('#Diab_te').check();
+    await page.locator('text=Pathologie :Obésité >> input[type="checkbox"]').check();
+    await page.locator('text=Pathologie :Obésité >> input[type="checkbox"]').uncheck();
+    await page.locator('#Suivi').check();
+    await page.locator('#Suivi').uncheck();
+    await page.locator('#Renforcement').check();
+    await page.locator('#Renforcement').uncheck();
+    await page.locator('input[type="radio"]').nth(1).check();
+    await page.locator('input[type="radio"]').first().check();
   });
 });
