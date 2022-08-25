@@ -269,7 +269,6 @@ test.describe.only("Test Ivehte Web", () => {
     await page.locator('text=Ateliers').click();
     await page.locator('button:has-text("Ajouter un nouvel atelier")').click();
     await page.locator('[placeholder="Entrer un nom de l\\\'atelier \\.\\.\\."]').click();
-    // Fill [placeholder="Entrer un nom de l\'atelier \.\.\."]
     await page.keyboard.type('Test CICD Atelier');
     await page.locator('text=Spécialité de l’intervenant :Kinésithérapeute >> [data-testid="KeyboardArrowDownIcon"]').click();
     await page.locator('ul[role="listbox"] >> text=Kinésithérapeute').click();
@@ -277,12 +276,9 @@ test.describe.only("Test Ivehte Web", () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.keyboard.press('ArrowDown');
-    // Press Enter
     await page.keyboard.press('Enter');
-    // Click text=Salle :Sélectionnez une salle >> [data-testid="KeyboardArrowDownIcon"]
     await page.locator('text=Salle :Sélectionnez une salle >> [data-testid="KeyboardArrowDownIcon"]').click();
     await page.keyboard.press('ArrowDown');
-    // Press Enter
     await page.keyboard.press('Enter');
     await page.locator('[placeholder="Tapez votre texte"]').click();
     await page.keyboard.type('TEST CICD');
@@ -307,8 +303,11 @@ test.describe.only("Test Ivehte Web", () => {
     await page.locator('text=Date Fin :​ >> [placeholder="dd\\/mm\\/yyyy"]').click();
     await page.keyboard.press('Control+a');
     await page.keyboard.type('03/09/2022');
-    await page.locator('#Atelier_7__Et_ex__').check();
-    await page.locator('text=Roger Gérard').click()
+    await page.locator('[placeholder="Rechercher par nom"]').click();
+    await page.keyboard.type('Test');
+    await page.locator('text=Test CICD Atelier').click();
+    //await page.locator('[placeholder="Rechercher par nom"]').click();
+    await page.locator('text=IVEHTE 2 TEST 2 CICD2').click();
     await page.locator('button:has-text("Valider le programme")').click();
   })
 
