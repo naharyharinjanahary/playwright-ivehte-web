@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe.only("Test Ivehte Web", () => {
+test.describe("Test Ivehte Web", () => {
   /**
    * Authentification
    */
@@ -296,15 +296,20 @@ test.describe.only("Test Ivehte Web", () => {
     await page.locator('button:has-text("Enregistrer les modifications")').click();
   })
 
-  test("Filtrage programme", async ({ page }) => {
+  test.only("Filtrage programme", async ({ page }) => {
     await page.goto('https://staging-ivehte-dev.madait-lab.com/programmes');
-    await page.locator('text=Pathologie :Obésité >> input[type="checkbox"]').check();
-    await page.locator('text=Pathologie :Obésité >> input[type="checkbox"]').uncheck();
-    await page.locator('#Suivi').check();
-    await page.locator('#Suivi').uncheck();
-    await page.locator('#Renforcement').check();
-    await page.locator('#Renforcement').uncheck();
+    await page.locator('text=Diabète').click();
+    await page.locator('text=Diabète').click();
+    await page.locator('text=Obésité').click();
+    await page.locator('text=Obésité').click();
+    await page.locator('text=Renforcement').first().click();
+    await page.locator('text=Renforcement').first().click();
+    await page.locator('text=Suivi').first().click();
+    await page.locator('text=Suivi').first().click();
+    await page.locator('text=Initial').first().click();
+    await page.locator('text=Initial').first().click();
     await page.locator('input[type="radio"]').nth(1).check();
+    await page.locator('input[type="radio"]').nth(2).check();
     await page.locator('input[type="radio"]').first().check();
   });
 });
