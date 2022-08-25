@@ -30,14 +30,6 @@ test.describe.only("Test Ivehte Web", () => {
     const ongletAgenda = page.locator("text=Mon agenda").first();
     await ongletAgenda.click();
 
-    /** Début Agenda par personnel */
-    await page.locator("text=Voir l'agenda de").click();
-    await page.locator("text=Eugène Barthelemy").click();
-    //await page.locator("#Christiane_Morel_").check();
-    await page.locator('button:has-text("Valider")').click();
-    await page.pause();
-    /** Fin Agenda par personnel */
-
     /** Début Agenda par date */
     await page.locator(`text=August 2022`).click();
     await page.locator("text=June").click();
@@ -56,6 +48,17 @@ test.describe.only("Test Ivehte Web", () => {
     // await page.pause();
     /** Fin Agenda par spécialité et type affichage */
   });
+
+  test("Partager un agenda", async ( {page} ) => {
+    /** Début Agenda par personnel */
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/agenda');
+    await page.locator('text=Partage d\'agenda').click();
+    await page.locator('text=Adrienne Moulin').click();
+    await page.locator("text=Emmanuel Leveque").click();
+    await page.locator('button:has-text("Partager")').click();
+    //await page.pause();
+    /** Fin Agenda par personnel */
+  })
 
   test("Créer un évenement", async ( {page} ) => {
     /****** Début Test Créer événement ******/
@@ -96,7 +99,7 @@ test.describe.only("Test Ivehte Web", () => {
       .click();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
-    await page.locator("text=Barthelemy Eugène").click();
+    await page.locator("text=Roger Alain").click();
     // await page.keyboard.press("Tab");
     // await page.locator("text=Jacquot Margaret").check();
     // await page.pause();
