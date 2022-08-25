@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Test Ivehte Web", () => {
+test.describe.only("Test Ivehte Web", () => {
   /**
    * Authentification
    */
@@ -263,7 +263,7 @@ test.describe("Test Ivehte Web", () => {
     await page.locator('button:has-text("Enregistrer l\'HDJ")').click();
   })
 
-  test.only('Créer un Atelier', async ({ page }) => {
+  test('Créer un Atelier', async ({ page }) => {
     await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
     await page.locator('#root >> text=Paramètres').click();
     await page.locator('text=Ateliers').click();
