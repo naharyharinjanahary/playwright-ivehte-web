@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe.only("Test Ivehte Web", () => {
+test.describe("Test Ivehte Web", () => {
   /**
    * Authentification
    */
@@ -262,6 +262,32 @@ test.describe.only("Test Ivehte Web", () => {
     await page.keyboard.type("TEST CICD IVEHTE");
     await page.locator('button:has-text("Enregistrer l\'HDJ")').click();
   })
+
+  test.only('Créer un Atelier', async ({ page }) => {
+    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+    await page.locator('#root >> text=Paramètres').click();
+    await page.locator('text=Ateliers').click();
+    await page.locator('button:has-text("Ajouter un nouvel atelier")').click();
+    await page.locator('[placeholder="Entrer un nom de l\\\'atelier \\.\\.\\."]').click();
+    // Fill [placeholder="Entrer un nom de l\'atelier \.\.\."]
+    await page.keyboard.type('Test CICD Atelier');
+    await page.locator('text=Spécialité de l’intervenant :Kinésithérapeute >> [data-testid="KeyboardArrowDownIcon"]').click();
+    await page.locator('ul[role="listbox"] >> text=Kinésithérapeute').click();
+    await page.locator('text=Intervenant(s) :Alain >> [data-testid="KeyboardArrowDownIcon"]').click();
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('ArrowDown');
+    // Press Enter
+    await page.keyboard.press('Enter');
+    // Click text=Salle :Sélectionnez une salle >> [data-testid="KeyboardArrowDownIcon"]
+    await page.locator('text=Salle :Sélectionnez une salle >> [data-testid="KeyboardArrowDownIcon"]').click();
+    await page.keyboard.press('ArrowDown');
+    // Press Enter
+    await page.keyboard.press('Enter');
+    await page.locator('[placeholder="Tapez votre texte"]').click();
+    await page.keyboard.type('TEST CICD');
+    await page.locator('button:has-text("Valider l\'Atelier")').click();
+  });
 
   test.skip("Créer un programme", async( {page} ) => {
     await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
