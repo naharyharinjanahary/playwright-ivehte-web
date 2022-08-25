@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Test Ivehte Web", () => {
+test.describe.only("Test Ivehte Web", () => {
   /**
    * Authentification
    */
@@ -296,7 +296,7 @@ test.describe("Test Ivehte Web", () => {
     await page.locator('button:has-text("Enregistrer les modifications")').click();
   })
 
-  test.only("Filtrage programme", async ({ page }) => {
+  test("Filtrage programme", async ({ page }) => {
     await page.goto('https://staging-ivehte-dev.madait-lab.com/programmes');
     await page.locator('text=Diabète').click();
     await page.locator('text=Diabète').click();
