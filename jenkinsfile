@@ -1,22 +1,9 @@
 pipeline {
-    agent  {
-        docker  {
-            image 'qawolf/playwright-ci:v1.0.0'
-        }
-    }
-
+    agent any 
     stages {
-        stage('Install playwright') {
+        stage('Stage 1') {
             steps {
-                sh 'npx playwright install'
-    
-            }
-        }
-        stage('tests') {
-            steps {
-                sh 'npx playwright test --list'
-                sh 'npx playwright test'
-            
+                echo 'Hello world!' 
             }
         }
     }
