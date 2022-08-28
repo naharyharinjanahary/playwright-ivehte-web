@@ -8,12 +8,11 @@ pipeline {
     stages {
         stage('Install playwright') {
             steps {
-                sh '''
-                    npm ci
-                    npm i -D @playwright/test
-                    npx playwright install
-                    npx playwright install --with-deps
-                '''
+                sh 'npm ci'
+                sh 'npm i -D @playwright/test'
+                sh 'npx playwright install'
+                sh  'npx playwright install --with-deps'
+                
             }
         }
         stage('help') {
@@ -23,10 +22,9 @@ pipeline {
         }
         stage('tests') {
             steps {
-                sh '''''
-                    npx playwright test --list
-                    npx playwright test 
-                '''''
+                sh 'npx playwright test --list'
+                sh 'npx playwright test'
+            
             }
         }
     }
